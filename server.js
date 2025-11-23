@@ -19,6 +19,7 @@ const auth = new google.auth.GoogleAuth({
 const sheets = google.sheets({version: "v4", auth});
 
 app.get("/data", async(req, res) => {
+    res.send("API Running Successfully 🚀");
     try{
         const response = await sheets.spreadsheets.values.get({
             spreadsheetId: process.env.SPREADSHEET_ID,
