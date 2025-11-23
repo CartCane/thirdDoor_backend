@@ -12,7 +12,7 @@ const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
 app.use(cors());
 
 const auth = new google.auth.GoogleAuth({
-    keyFile: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+    credentials: JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON),
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
@@ -30,6 +30,7 @@ app.get("/data", async(req, res) => {
             rows: response.data.values,
         });
     } catch (error) {
+        console.error("Google Sheets Error:", error);
         res.status(500).json({error: error.message});
     }
 });
